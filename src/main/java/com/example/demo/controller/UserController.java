@@ -7,31 +7,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.service.UserService;
 
-// @Controller
-
-// public class UserController {
-
-//     @RequestMapping("/")
-//     public String getHomePage() {
-//         return "hello from Controller";
-//     }
- 
-// }
-
-@RestController
+@Controller
 
 public class UserController {
 
     private UserService userService;
-    
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    @RequestMapping("/hoidanit")
 
-    @GetMapping("")
     public String getHomePage() {
-        return this.userService.handleHello();
+        String Test = this.userService.handleHello();
+        return "eric.html";
     }
+
 }
+
+// @RestController
+
+// public class UserController {
+
+// private UserService userService;
+
+// public UserController(UserService userService) {
+// this.userService = userService;
+// }
+
+// @GetMapping("")
+// public String getHomePage() {
+// return this.userService.handleHello();
+// }
+// }
