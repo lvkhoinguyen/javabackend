@@ -16,6 +16,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // import ch.qos.logback.core.model.Model;
 
@@ -88,4 +89,18 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
+    @GetMapping("/admin/user/delete/{id}") // GET
+    public String getDeleteUserPage(Model model, @PathVariable long id) {
+        model.addAttribute("id", id);
+        // User user = new User();
+        // user.setId(id);
+        model.addAttribute("newUser", new User());
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete") 
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User eric) {
+        this.userService.deleteUser(eric.getId());
+        return "redirect:/admin/user";
+    }
 }
