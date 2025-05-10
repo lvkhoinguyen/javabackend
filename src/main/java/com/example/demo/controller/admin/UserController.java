@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.admin;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class UserController {
         List<User> users = this.userService.getAllUsers();
         System.out.println("check" + users);
         model.addAttribute("users1", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/{id}")
@@ -53,7 +53,7 @@ public class UserController {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user);
         model.addAttribute("id", id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
     @RequestMapping("/admin/user/create") // GET
@@ -98,7 +98,7 @@ public class UserController {
         return "admin/user/delete";
     }
 
-    @PostMapping("/admin/user/delete") 
+    @PostMapping("/admin/user/delete")
     public String postDeleteUser(Model model, @ModelAttribute("newUser") User eric) {
         this.userService.deleteUser(eric.getId());
         return "redirect:/admin/user";
