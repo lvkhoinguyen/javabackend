@@ -32,7 +32,7 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
-    private final PasswordEncoder passwordEncoder ;
+    private final PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService, UploadService uploadService,
             ServletContext servletContext,
@@ -55,7 +55,6 @@ public class UserController {
     @RequestMapping("/admin/user")
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
-        System.out.println("check" + users);
         model.addAttribute("users1", users);
         return "admin/user/show";
     }
@@ -68,7 +67,7 @@ public class UserController {
         return "admin/user/detail";
     }
 
-    @GetMapping("/admin/user/create") // GET
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
@@ -79,12 +78,13 @@ public class UserController {
             @RequestParam("hoidanitFile") MultipartFile file) {
         String avatar = this.uploadService.handSaveUploadFile(file, "avatar");
         String hashPassWord = this.passwordEncoder.encode(hoidanit.getPassword());
-        
+
         hoidanit.setAvatar(avatar);
         hoidanit.setPassword(hashPassWord);
         hoidanit.setRole(this.userService.getRoleByName(hoidanit.getRole().getName()));
-        //saveRole
-        
+        // saveRole
+        this.userService.handleSaveUser(hoidanit);
+
         return "redirect:/admin/user";
 
     }
@@ -108,11 +108,9 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @GetMapping("/admin/user/delete/{id}") // GET
+    @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable long id) {
         model.addAttribute("id", id);
-        // User user = new User();
-        // user.setId(id);
         model.addAttribute("newUser", new User());
         return "admin/user/delete";
     }

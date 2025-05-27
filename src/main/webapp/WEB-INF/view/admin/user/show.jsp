@@ -30,7 +30,7 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">manage product</h1>
+                                <h1 class="mt-4">manage Users</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dasboard</a></li>
                                     <li class="breadcrumb-item active">Dashboard</li>
@@ -39,21 +39,46 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justiify-content-between">
-                                                <h3>User Detail: ${id}</h3>
-
+                                                <a href="/admin/user/create" class="btn btn-primary mb-3">Create New
+                                                    User</a>
                                             </div>
 
                                             <hr />
-                                            <div class="card" style="width: 60%">
-                                                <div class="card-header">
-                                                    User Information
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">ID :${user.id}</li>
-                                                    <li class="list-group-item">Email ${user.id}</li>
-                                                    <li class="list-group-item">FullName ${user.fullName}</li>
-                                                    <li class="list-group-item">Address ${user.address}</li>
-                                                </ul>
+                                            <div class="card" style="width: 80%">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Email</th>
+                                                            <th>FullName</th>
+                                                            <th>Role</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <c:forEach var="user" items="${users1}">
+                                                            <tr>
+                                                                <td>${user.id}</td>
+                                                                <td>${user.email}</td>
+                                                                <td>${user.fullName}</td>
+                                                                <td>${user.role.name}</td>
+                                                                <td>
+                                                                    <a href="/admin/user/${user.id}"
+                                                                        class="btn btn-success">Update</a>
+                                                                    <a href="/admin/user/update/${user.id}"
+                                                                        class="btn btn-primary">Update</a>
+                                                                    <a href="/admin/user/delete/${user.id}"
+                                                                        class="btn btn-danger">Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                        <c:if test="${empty users1}">
+                                                            <tr>
+                                                                <td colspan="5">No users found.</td>
+                                                            </tr>
+                                                        </c:if>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                             <a href="/admin/user" class="btn btn-success mt-3">Back</a>
                                         </div>
