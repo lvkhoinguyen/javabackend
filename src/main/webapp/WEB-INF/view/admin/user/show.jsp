@@ -64,7 +64,7 @@
                                                                 <td>${user.role.name}</td>
                                                                 <td>
                                                                     <a href="/admin/user/${user.id}"
-                                                                        class="btn btn-success">Update</a>
+                                                                        class="btn btn-success">View</a>
                                                                     <a href="/admin/user/update/${user.id}"
                                                                         class="btn btn-primary">Update</a>
                                                                     <a href="/admin/user/delete/${user.id}"

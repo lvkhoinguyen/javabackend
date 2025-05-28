@@ -19,14 +19,7 @@
         </head>
 
         <body>
-            hello from jsp
-            <h1>
-                ${eric}
-            </h1>
-            <h1>
-                ${hoidanit}
-            </h1>
-            <button class ="btn btn-warning">submit</button>
+
         </body>
 
         </html>
